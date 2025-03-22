@@ -3,7 +3,7 @@
 int _print_binary(va_list *list)
 {
     int num_rec = 0;
-    long num = va_arg(*list, long);
+    unsigned long num = va_arg(*list, unsigned long);
 
     if (num == 0)
     {
@@ -17,7 +17,7 @@ int _print_binary(va_list *list)
 }
 
 
-void binary_rec(int *num_rec, long num)
+void binary_rec(int *num_rec, unsigned long num)
 {
 
     if (num / 2)
