@@ -11,7 +11,7 @@ int main(void)
 {
     int len, len2;
 
-    len = _printf(NULL);
+    len = _printf("%");
     len2 = printf("%c%cth %s%s a%cg%s: Y%sou %s no%ching%s Snow.%c", 'W', 'i', "some ", "more", 'r', "s", "", "know", 't', ", Jon", '\n');
 
     
