@@ -8,7 +8,7 @@ int _printf(const char* str, ...)
     if (!str)
     {
         va_end(list);
-        return 0;
+        return -1;
     }
     
     va_start(list, str);
