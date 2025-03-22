@@ -1,4 +1,5 @@
 # ALX Software Engineering - Custom printf Function
+![Description of Image](https://i.pinimg.com/736x/fe/9a/1c/fe9a1c50f4a11ba27b7ae12adc5ddb01.jpg)
 
 ## Project Overview
 
