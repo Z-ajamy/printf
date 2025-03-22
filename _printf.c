@@ -27,6 +27,10 @@ int _printf(const char* str, ...)
             }
             else
             {
+                if (i == 0)
+                {
+                    i--;
+                }
                 break;
             }
         }
