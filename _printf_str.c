@@ -7,15 +7,7 @@ int _printf_str (va_list *list)
 
     ptr = va_arg(*list, char *);
     if (ptr == NULL)
-    {
-        char *str = "(null)";
-        while (str[n])
-        {
-            _putchar(str[n]);
-            n++;
-        }
-        return n;
-    }
+        ptr = "(null)";
     
     while (ptr[n])
     {

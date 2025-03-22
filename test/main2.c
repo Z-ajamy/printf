@@ -11,8 +11,8 @@ int main(void)
 {
     int len, len2;
 
-    len = _printf("%s\n", (char *)0);
-    len2 = printf("(null) ;)\n");
+    len = _printf("%c%cth %s%s a%cg%s: Y%sou %s no%ching%s Snow.%c", 'W', 'i', "some ", "more", 'r', "s", "", "know", 't', ", Jon", '\n');
+    len2 = printf("%c%cth %s%s a%cg%s: Y%sou %s no%ching%s Snow.%c", 'W', 'i', "some ", "more", 'r', "s", "", "know", 't', ", Jon", '\n');
 
     
     printf("Length:[%d, %d]\n", len, len2);

@@ -15,7 +15,7 @@ int _printf(const char* str, ...)
         }
         else
         {
-           n = -2 + _format_caces(str[++i], &list);
+           n += (-2 + _format_caces(str[++i], &list));
         }
         i++;
     }
