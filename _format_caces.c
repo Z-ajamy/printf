@@ -28,6 +28,10 @@ int _format_caces(char f, va_list *list)
     {
         n = _printf_int(list);
     }
+    if (f == 'b')
+    {
+        n = _print_binary(list);
+    }
     
 
 	return (n);

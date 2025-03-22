@@ -80,5 +80,9 @@ int _printf_str(va_list *list);
 
 
 int _printf_int(va_list *list);
+int _print_binary(va_list *list);
+void binary_rec(int *num_rec, long num);
+void print_num_rec(int *num_rec, int num);
+
 
 #endif /* MAIN_H */

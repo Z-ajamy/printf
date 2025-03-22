@@ -35,7 +35,7 @@ int _printf(const char *str, ...)
 			{
 				return (-1);
 			}
-			if (str[i + 1] == 'c' || str[i + 1] == 's' || str[i + 1] == '%' || str[i + 1] == 'i' || str[i + 1] == 'd')
+			if (str[i + 1] == 'c' || str[i + 1] == 's' || str[i + 1] == '%' || str[i + 1] == 'i' || str[i + 1] == 'd'|| str[i + 1] == 'b')
 			{
 				n += _format_caces(str[++i], &list);
 			}
