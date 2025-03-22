@@ -5,6 +5,12 @@ int _printf(const char* str, ...)
     int i = 0, n = 0;
     va_list list;
 
+    if (!str)
+    {
+        va_end(list);
+        return 0;
+    }
+    
     va_start(list, str);
 
     while (str[i])
