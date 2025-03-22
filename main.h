@@ -76,4 +76,9 @@ int _printf_char(va_list *list);
  */
 int _printf_str(va_list *list);
 
+
+
+
+int _printf_int(va_list *list);
+
 #endif /* MAIN_H */
