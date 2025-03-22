@@ -18,10 +18,5 @@ int _format_caces(char f, va_list *list)
         n = _printf_str(list);
     }
     
-    if (n > 0)
-    {
-        return n;
-    }
-    
-    return 2;
+    return n;
 }
