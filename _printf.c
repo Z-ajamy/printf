@@ -2,7 +2,7 @@
 
 int _printf(const char* str, ...)
 {
-    int i = 0, n = 0;
+    int i = 0, n = 0, k;
     va_list list;
 
     if (!str)
@@ -15,6 +15,7 @@ int _printf(const char* str, ...)
 
     while (str[i])
     {
+        k = n;
         if (str[i] != '%')
         {
             _putchar(str[i]);
@@ -23,15 +24,33 @@ int _printf(const char* str, ...)
         {
             if (str[i + 1])
             {
-                n += (-2 + _format_caces(str[++i], &list));
+                n += (-2 + _format_caces(str[i + 1], &list));
+                if (n != k)
+                {
+                    i++;
+                }
             }
-            else
+            if(!str[i] || n==k)
             {
+                if (k == n && str[i])
+                {
+                    if (str[i + 1])
+                    {
+                        _putchar('%');
+                        if (str[i] != '%')
+                        {
+                            _putchar(str[i]);
+                        }
+                    }
+                    else
+                        i--;
+                }
+                
                 if (i == 0)
                 {
                     i--;
+                    break;
                 }
-                break;
             }
         }
         i++;
