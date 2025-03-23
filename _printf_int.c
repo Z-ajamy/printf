@@ -17,13 +17,15 @@ int print_num_rec(int num, int *m, char *ptr)
 	}
 	if (a == 0)
 	{
-		return 0;
+		_putchar(ptr, *m);
+		*m = 0;
 	}
 	ptr[*m] = ('0' + num % 10);
 	*m = *m +1;
 	if (*m == 1023)
 	{
-		return 0;
+		_putchar(ptr, *m);
+		*m = 0;
 	}
 	return 1;
 }
@@ -51,10 +53,11 @@ int _printf_int(va_list *list, int *m, char *ptr)
 		*m = *m + 1;
 		if (*m == 1023)
 		{
-			return 0;
+			_putchar(ptr, *m);
+			*m = 0;
 		}
 		
-		if (num < -2147483647) /* Handles INT_MIN case */
+		if (num < -2147483647)
 		{
 			big = 1;
 			num = num / 10;
@@ -65,7 +68,8 @@ int _printf_int(va_list *list, int *m, char *ptr)
 	a = print_num_rec(num, m, ptr);
 	if (a == 0)
 	{
-		return 0;
+		_putchar(ptr, *m);
+		*m = 0;
 	}
 	
 	if (big)
@@ -75,7 +79,8 @@ int _printf_int(va_list *list, int *m, char *ptr)
 	}
 	if (*m == 1023)
 	{
-		return 0;
+		_putchar(ptr, *m);
+		*m = 0;
 	}
 	return (1);
 }

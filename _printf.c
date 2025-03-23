@@ -47,7 +47,8 @@ int _printf(const char *str, ...)
 				m = _format_caces(str[++i], &list, &n, ptr);
 				if (m == 0)
 				{
-					break;
+					_putchar(ptr, m);
+					m = 0;
 				}
 			}
 			else if(err == 0)

@@ -18,7 +18,8 @@ int _printf_HEX_rec(unsigned int num, int *m, char *ptr)
 	}
 	if (b == 0)
 	{
-		return 0;
+		_putchar(ptr, *m);
+		*m = 0;
 	}
 
 	a = num % 16;
@@ -36,7 +37,8 @@ int _printf_HEX_rec(unsigned int num, int *m, char *ptr)
 
 	if (*m == 1023)
 	{
-		return 0;
+		_putchar(ptr, *m);
+		*m = 0;
 	}
 	return 1;
 }
@@ -60,7 +62,8 @@ int _printf_HEX(va_list *list, int *m, char *ptr)
 	a = _printf_HEX_rec(num, m, ptr);
 	if (a == 0)
 	{
-		return 0;
+		_putchar(ptr, *m);
+		*m = 0;
 	}
 	return (1);
 }

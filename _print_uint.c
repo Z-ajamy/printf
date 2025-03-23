@@ -10,7 +10,8 @@ int _print_Uint(va_list *list, int *m, char *ptr)
 	a = print_Unum_rec(num, m, ptr);
 	if (a == 0)
 	{
-		return 0;
+		_putchar(ptr, *m);
+		*m = 0;
 	}
 
 	return (1);
@@ -26,13 +27,15 @@ int print_Unum_rec(unsigned int num, int *m, char *ptr)
 	}
 	if (a == 0)
 	{
-		return 0;
+		_putchar(ptr, *m);
+		*m = 0;
 	}
 	ptr[*m] = ('0' + num % 10);
 	*m = *m +1;
 	if (*m == 1023)
 	{
-		return 0;
+		_putchar(ptr, *m);
+		*m = 0;
 	}
 	return 1;
 }

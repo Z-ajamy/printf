@@ -1,41 +1,6 @@
 #include "main.h"
 
 /**
- * _format_caces - Handles specific format specifiers.
- * @f: The format specifier character.
- * @list: The argument list containing values to be printed.
- *
- * Return: The number of characters printed.
- */
-int _format_caces(char f, va_list *list, int *m, char *ptr)
-{
-	int n = 1;
-
-	if (f == '%')
-	{
-		ptr[*m] = '%';
-		*m = *m + 1;
-		if (*m == 1023)
-		{
-			n = 0;
-		}
-	}
-	if (f == 'c')
-	{
-		n = _printf_char(list, m, ptr);
-	}
-	if (f == 's')
-	{
-		n = _printf_str(list, m, ptr);
-	}
-    if (f == 'd' || f == 'i')
-    {
-        n = _printf_int(list, m, ptr);
-    }
-	return (n);
-}
-
-/**
  * _printf - Custom implementation of printf function.
  * @str: The format string containing directives.
  *
@@ -82,7 +47,8 @@ int _printf(const char *str, ...)
 				m = _format_caces(str[++i], &list, &n, ptr);
 				if (m == 0)
 				{
-					break;
+					_putchar(ptr, *m);
+					*m = 0;
 				}
 			}
 			else if(err == 0)
@@ -103,6 +69,8 @@ int _printf(const char *str, ...)
 	}
 	return (n);
 }
+#include "main.h"
+
 /**
  * _printf_char - Prints a single character.
  * @list: The argument list containing the character.
@@ -119,7 +87,16 @@ int _printf_char(va_list *list, int *m, char *ptr)
 	}
 	return (1);
 }
+#include "main.h"
 
+/**
+ * print_num_rec - Recursively prints digits of an integer
+ * @num_rec: Pointer to an integer that keeps track of printed digits
+ * @num: The number to be printed
+ *
+ * Description: This function recursively divides the number by 10
+ * and prints its digits one by one, ensuring correct order.
+ */
 int print_num_rec(int num, int *m, char *ptr)
 {
 	int a = 1;
@@ -129,13 +106,15 @@ int print_num_rec(int num, int *m, char *ptr)
 	}
 	if (a == 0)
 	{
-		return 0;
+		_putchar(ptr, *m); // تفريغ المخزن
+		*m = 0;
 	}
 	ptr[*m] = ('0' + num % 10);
 	*m = *m +1;
 	if (*m == 1023)
 	{
-		return 0;
+		_putchar(ptr, *m); // تفريغ المخزن
+		*m = 0;
 	}
 	return 1;
 }
@@ -163,7 +142,8 @@ int _printf_int(va_list *list, int *m, char *ptr)
 		*m = *m + 1;
 		if (*m == 1023)
 		{
-			return 0;
+			_putchar(ptr, *m); // تفريغ المخزن
+			*m = 0;
 		}
 		
 		if (num < -2147483647) /* Handles INT_MIN case */
@@ -177,7 +157,8 @@ int _printf_int(va_list *list, int *m, char *ptr)
 	a = print_num_rec(num, m, ptr);
 	if (a == 0)
 	{
-		return 0;
+		_putchar(ptr, *m); // تفريغ المخزن
+		*m = 0;
 	}
 	
 	if (big)
@@ -187,7 +168,8 @@ int _printf_int(va_list *list, int *m, char *ptr)
 	}
 	if (*m == 1023)
 	{
-		return 0;
+		_putchar(ptr, *m); // تفريغ المخزن
+		*m = 0;
 	}
 	return (1);
 }
@@ -227,6 +209,63 @@ int _printf_str(va_list *list, int *m, char *ptr)
 #include "main.h"
 
 /**
+ * _format_caces - Handles specific format specifiers.
+ * @f: The format specifier character.
+ * @list: The argument list containing values to be printed.
+ *
+ * Return: The number of characters printed.
+ */
+int _format_caces(char f, va_list *list, int *m, char *ptr)
+{
+	int n = 1;
+
+	if (f == '%')
+	{
+		ptr[*m] = '%';
+		*m = *m + 1;
+		if (*m == 1023)
+		{
+			n = 0;
+		}
+	}
+	if (f == 'c')
+	{
+		n = _printf_char(list, m, ptr);
+	}
+	if (f == 's')
+	{
+		n = _printf_str(list, m, ptr);
+	}
+    if (f == 'd' || f == 'i')
+    {
+        n = _printf_int(list, m, ptr);
+    }
+    if (f == 'b')
+    {
+        n = _print_binary(list, m, ptr);
+    }
+	if (f == 'u')
+	{
+		n = _print_Uint(list, m, ptr);
+	}
+	if (f == 'o')
+	{
+		n = _printf_oct(list, m, ptr);
+	}
+	if (f == 'x')
+	{
+		n = _printf_hex(list, m, ptr);
+	}
+    if (f == 'X')
+	{
+		n = _printf_HEX(list, m, ptr);
+	}
+
+	return (n);
+}
+#include "main.h"
+
+/**
  * _putchar - Writes a single character to standard output.
  * @a: The character to print.
  *
@@ -237,3 +276,39 @@ int _putchar(char *a, int n)
 	int b = write(1, a, n);
 	return (b);
 }
+#ifndef MAIN_H
+#define MAIN_H
+
+#include <stdlib.h>
+#include <stdarg.h>
+#include <unistd.h>
+#include <stdio.h>
+
+/**
+ * File: main.h
+ * Description: Header file for a custom printf function.
+ *
+ * This file contains function prototypes required for implementing
+ * a simplified version of the printf function.
+ */
+
+int _printf(const char *str, ...);
+int _putchar(char *a, int n);
+int _format_caces(char f, va_list *list, int *n, char *ptr);
+int _printf_char(va_list *list, int *m, char *ptr);
+int _printf_str(va_list *list, int *m, char *ptr);
+int _printf_int(va_list *list, int *m, char *ptr);
+int print_num_rec(int num, int *n, char *ptr);
+int _print_binary(va_list *list, int *m, char *ptr);
+int binary_rec(unsigned int num, int *n, char *ptr);
+int _print_Uint(va_list *list, int *m, char *ptr);
+int print_Unum_rec(unsigned int num, int *m, char *ptr);
+int _printf_oct(va_list *list, int *m, char *ptr);
+int _printf_oct_rec(unsigned int num, int *m, char *ptr);
+int _printf_hex(va_list *list, int *m, char *ptr);
+int _printf_hex_rec(unsigned int num, int *m, char *ptr);
+int _printf_HEX(va_list *list, int *m, char *ptr);
+int _printf_HEX_rec(unsigned int num, int *m, char *ptr);
+
+
+#endif /* MAIN_H */
