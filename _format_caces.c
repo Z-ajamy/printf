@@ -7,50 +7,52 @@
  *
  * Return: The number of characters printed.
  */
-int _format_caces(char f, va_list *list, int *m, char *ptr)
+int _format_caces(char f, va_list *list, char *ptr, int *k)
 {
-	int n = 1;
+	int n = 0;
 
 	if (f == '%')
 	{
-		ptr[*m] = '%';
-		*m = *m + 1;
-		if (*m == 1023)
+		ptr[*k] = ('%');
+		*k = *k +1;
+		if (*k == 1024)
 		{
-			n = 0;
-		}
+			_putchar(ptr, k);
+			*k = 0;
+		};
+		n++;
 	}
 	if (f == 'c')
 	{
-		n = _printf_char(list, m, ptr);
+		n = _printf_char(list, ptr, k);
 	}
 	if (f == 's')
 	{
-		n = _printf_str(list, m, ptr);
+		n = _printf_str(list, ptr, k);
 	}
     if (f == 'd' || f == 'i')
     {
-        n = _printf_int(list, m, ptr);
+        n = _printf_int(list, ptr, k);
     }
     if (f == 'b')
     {
-        n = _print_binary(list, m, ptr);
+        n = _print_binary(list, ptr, k);
     }
 	if (f == 'u')
 	{
-		n = _print_Uint(list, m, ptr);
+		n = _print_Uint(list, ptr, k);
 	}
 	if (f == 'o')
 	{
-		n = _printf_oct(list, m, ptr);
+		n = _printf_oct(list, ptr, k);
 	}
 	if (f == 'x')
 	{
-		n = _printf_hex(list, m, ptr);
+		n = _printf_hex(list, ptr, k);
 	}
     if (f == 'X')
 	{
-		n = _printf_HEX(list, m, ptr);
+		n = _printf_HEX(list, ptr, k);
 	}
 
 	return (n);

@@ -6,8 +6,7 @@
  *
  * Return: On success, returns 1. On failure, -1 is returned.
  */
-int _putchar(char *a, int n)
+int _putchar(char* ptr, int *k)
 {
-	int b = write(1, a, n);
-	return (b);
+	return (write(1, ptr, *k));
 }

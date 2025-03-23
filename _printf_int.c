@@ -8,26 +8,21 @@
  * Description: This function recursively divides the number by 10
  * and prints its digits one by one, ensuring correct order.
  */
-int print_num_rec(int num, int *m, char *ptr)
+void print_num_rec(int *num_rec, int num, char *ptr, int *k)
 {
-	int a = 1;
 	if (num / 10)
 	{
-		a = print_num_rec(num / 10, m, ptr);
+		print_num_rec(num_rec, num / 10, ptr, k);
 	}
-	if (a == 0)
+
+	ptr[*k] = ('0' + num % 10);
+	*k = *k +1;
+	if (*k == 1024)
 	{
-		_putchar(ptr, *m);
-		*m = 0;
+		_putchar(ptr, k);
+		*k = 0;
 	}
-	ptr[*m] = ('0' + num % 10);
-	*m = *m +1;
-	if (*m == 1023)
-	{
-		_putchar(ptr, *m);
-		*m = 0;
-	}
-	return 1;
+	(*num_rec)++;
 }
 
 /**
@@ -39,9 +34,9 @@ int print_num_rec(int num, int *m, char *ptr)
  *
  * Return: The total number of characters printed.
  */
-int _printf_int(va_list *list, int *m, char *ptr)
+int _printf_int(va_list *list, char *ptr, int *k)
 {
-	int a;
+	int n = 0;
 	char big = 0;
 	int num;
 
@@ -49,15 +44,15 @@ int _printf_int(va_list *list, int *m, char *ptr)
 
 	if (num < 0)
 	{
-		ptr[*m] = ('-');
-		*m = *m + 1;
-		if (*m == 1023)
+		ptr[*k] = ('-');
+		*k = *k +1;
+		if (*k == 1024)
 		{
-			_putchar(ptr, *m);
-			*m = 0;
+			_putchar(ptr, k);
+			*k = 0;
 		}
-		
-		if (num < -2147483647)
+		n++;
+		if (num < -2147483647) /* Handles INT_MIN case */
 		{
 			big = 1;
 			num = num / 10;
@@ -65,22 +60,18 @@ int _printf_int(va_list *list, int *m, char *ptr)
 		num *= -1;
 	}
 
-	a = print_num_rec(num, m, ptr);
-	if (a == 0)
-	{
-		_putchar(ptr, *m);
-		*m = 0;
-	}
-	
+	print_num_rec(&n, num, ptr, k);
+
 	if (big)
 	{
-		ptr[*m] = ('0' + 8); /* Adds back the last digit of INT_MIN */
-		*m = *m + 1;
+		ptr[*k] = ('0' + 8);
+		*k = *k +1;
+		if (*k == 1024)
+		{
+			_putchar(ptr, k);
+			*k = 0;
+		} /* Adds back the last digit of INT_MIN */
+		n++;
 	}
-	if (*m == 1023)
-	{
-		_putchar(ptr, *m);
-		*m = 0;
-	}
-	return (1);
+	return (n);
 }

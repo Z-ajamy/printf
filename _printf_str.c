@@ -8,26 +8,26 @@
  *
  * Return: The number of characters printed.
  */
-int _printf_str(va_list *list, int *m, char *ptr)
+int _printf_str(va_list *list, char *p, int *k)
 {
-	char *p = NULL;
+	char *ptr = NULL;
 	int n = 0;
 
-	p = va_arg(*list, char *);
-	if (p == NULL)
-		p = "(null)";
+	ptr = va_arg(*list, char *);
+	if (ptr == NULL)
+		ptr = "(null)";
 
-	while (p[n])
+	while (ptr[n])
 	{
-		ptr[*m] = (p[n]);
-		*m = *m + 1;
-		if (*m == 1023)
+		p[*k] = (ptr[n]);
+		*k = *k +1;
+		if (*k == 1024)
 		{
-			return 0;
+			_putchar(p, k);
+			*k = 0;
 		}
-		
 		n++;
 	}
 
-	return (1);
+	return (n);
 }

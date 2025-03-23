@@ -1,41 +1,31 @@
 #include"main.h"
 
-int _print_Uint(va_list *list, int *m, char *ptr)
+int _print_Uint(va_list *list, char *ptr, int *k)
 {
-    int a;
+    int n = 0;
 	unsigned int num;
 
 	num = va_arg(*list, unsigned int);
 
-	a = print_Unum_rec(num, m, ptr);
-	if (a == 0)
-	{
-		_putchar(ptr, *m);
-		*m = 0;
-	}
-
-	return (1);
+	print_Unum_rec(&n, num, ptr, k);
+	return (n);
 }
 
 
-int print_Unum_rec(unsigned int num, int *m, char *ptr)
+
+void print_Unum_rec(int *num_rec, unsigned int num, char *ptr, int *k)
 {
-	int a = 1;
 	if (num / 10)
 	{
-		a = print_Unum_rec(num / 10, m, ptr);
+		print_num_rec(num_rec, num / 10, ptr, k);
 	}
-	if (a == 0)
+
+	ptr[*k] = ('0' + num % 10);
+	*k = *k +1;
+	if (*k == 1024)
 	{
-		_putchar(ptr, *m);
-		*m = 0;
+		_putchar(ptr, k);
+		*k = 0;
 	}
-	ptr[*m] = ('0' + num % 10);
-	*m = *m +1;
-	if (*m == 1023)
-	{
-		_putchar(ptr, *m);
-		*m = 0;
-	}
-	return 1;
+	(*num_rec)++;
 }

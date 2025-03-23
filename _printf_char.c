@@ -6,13 +6,14 @@
  *
  * Return: Always returns 1 (one character printed).
  */
-int _printf_char(va_list *list, int *m, char *ptr)
+int _printf_char(va_list *list, char *ptr, int *k)
 {
-	ptr[*m] = (va_arg(*list, int));
-	*m = *m + 1;
-	if (*m == 1023)
+	ptr[*k] = (va_arg(*list, int));
+	*k = *k +1;
+	if (*k == 1024)
 	{
-		return 0;
+		_putchar(ptr, k);
+		*k = 0;
 	}
 	return (1);
 }

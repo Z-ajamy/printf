@@ -8,28 +8,22 @@
  * Description: This function recursively divides the number by 8
  * to extract octal digits in the correct order.
  */
-int _printf_oct_rec(unsigned int num, int *m, char *ptr)
+void _printf_oct_rec(int *n, unsigned int num, char *ptr, int *k)
 {
-	int a = 1;
 	if (num / 8)
 	{
-		a = _printf_oct_rec(num / 8, m, ptr);
+		_printf_oct_rec(n, num / 8, ptr, k);
 	}
-	if (a == 0)
-	{
-		_putchar(ptr, *m);
-		*m = 0;
-	}
-	ptr[*m] = ('0' + num % 8);
-	*m = *m +1;
-	if (*m == 1023)
-	{
-		_putchar(ptr, *m);
-		*m = 0;
-	}
-	return 1;
-}
 
+	ptr[*k] = ('0' + num % 8);
+				*k = *k +1;
+				if (*k == 1024)
+				{
+					_putchar(ptr, k);
+					*k = 0;
+				}
+	*n = *n + 1;
+}
 
 /**
  * _printf_oct - Converts an unsigned integer to octal and prints it
@@ -40,16 +34,11 @@ int _printf_oct_rec(unsigned int num, int *m, char *ptr)
  *
  * Return: The total number of characters printed.
  */
-int _printf_oct(va_list *list, int *m, char *ptr)
+int _printf_oct(va_list *list, char *ptr, int *k)
 {
-	int a;
+	int n = 0;
 	unsigned int num = va_arg(*list, unsigned int);
 
-	a = _printf_oct_rec(num, m, ptr);
-	if (a == 0)
-	{
-		_putchar(ptr, *m);
-		*m = 0;
-	}
-	return (1);
+	_printf_oct_rec(&n, num, ptr, k);
+	return (n);
 }
