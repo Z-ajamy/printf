@@ -9,10 +9,11 @@
  */
 int main(void)
 {
-    int len;
+    int len, len2;
 
-    len = _printf("%b\n", 8);
-    printf("Length:[%d]\n", len);
+    len = _printf("%X\n", 271);;
+    len2 = printf("%x\n", 271);
 
+    printf("Length:[%d, %i]\n", len, len2);
     return 0;
 }

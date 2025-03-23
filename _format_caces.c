@@ -32,7 +32,22 @@ int _format_caces(char f, va_list *list)
     {
         n = _print_binary(list);
     }
-    
+	if (f == 'u')
+	{
+		n = _print_Uint(list);
+	}
+	if (f == 'o')
+	{
+		n = _printf_oct(list);
+	}
+	if (f == 'x')
+	{
+		n = _printf_hex(list);
+	}
+    if (f == 'X')
+	{
+		n = _printf_HEX(list);
+	}
 
 	return (n);
 }

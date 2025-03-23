@@ -80,9 +80,18 @@ int _printf_str(va_list *list);
 
 
 int _printf_int(va_list *list);
+void print_num_rec(int *num_rec, int num);
 int _print_binary(va_list *list);
 void binary_rec(int *num_rec, unsigned int num);
 void print_num_rec(int *num_rec, int num);
+int _print_Uint(va_list *list);
+void print_Unum_rec(int *num_rec, unsigned int num);
+void _printf_oct_rec(int *n, unsigned int num);
+int _printf_oct(va_list *list);
+int _printf_hex(va_list *list);
+void _printf_hex_rec(int *n, unsigned int num);
+int _printf_HEX(va_list *list);
+void _printf_HEX_rec(int *n, unsigned int num);
 
 
 #endif /* MAIN_H */
