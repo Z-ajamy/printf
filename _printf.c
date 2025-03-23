@@ -26,7 +26,7 @@ int _printf(const char *str, ...)
 
 	va_start(list, str);
 
-	while (str[i] && n < 1023)
+	while (str[i])
 	{
 		if (str[i] != '%')
 		{
