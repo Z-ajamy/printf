@@ -8,27 +8,37 @@
  * Description: This function recursively divides the number by 16
  * to extract hexadecimal digits in the correct order.
  */
-void _printf_HEX_rec(int *n, unsigned int num)
+int _printf_HEX_rec(unsigned int num, int *m, char *ptr)
 {
-	int a;
+	int a, b;
 
 	if (num / 16)
 	{
-		_printf_HEX_rec(n, num / 16);
+		b = _printf_HEX_rec(num / 16, m , ptr);
+	}
+	if (b == 0)
+	{
+		return 0;
 	}
 
 	a = num % 16;
 
 	if (a >= 0 && a <= 9)
 	{
-		_putchar('0' + a);
+		ptr[*m] = ('0' + a);
+		*m = *m +1;
 	}
 	else
 	{
-		_putchar('A' + (a - 10));
+		ptr[*m] = ('A' + (a - 10));
+		*m = *m +1;
 	}
 
-	*n = *n + 1;
+	if (*m == 1023)
+	{
+		return 0;
+	}
+	return 1;
 }
 
 /**
@@ -40,13 +50,17 @@ void _printf_HEX_rec(int *n, unsigned int num)
  *
  * Return: The total number of characters printed.
  */
-int _printf_HEX(va_list *list)
+int _printf_HEX(va_list *list, int *m, char *ptr)
 {
 	unsigned int num;
-	int n = 0;
+	int a;
 
 	num = va_arg(*list, unsigned int);
 
-	_printf_HEX_rec(&n, num);
-	return (n);
+	a = _printf_HEX_rec(num, m, ptr);
+	if (a == 0)
+	{
+		return 0;
+	}
+	return (1);
 }

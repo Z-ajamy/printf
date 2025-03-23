@@ -11,47 +11,60 @@
  */
 int _printf(const char *str, ...)
 {
-	int i = 0, n = 0;
+	int i = 0, n = 0, err = 0, m = 1;
+	char *ptr;
 	va_list list;
 
+	ptr = (char *)malloc(sizeof(char) * 1024);
+	if (!ptr)
+		return -1;
+	
 	if (!str)
 	{
-		va_end(list);
 		return (-1);
 	}
 
 	va_start(list, str);
 
-	while (str[i])
+	while (str[i] && n < 1023)
 	{
-		if (str[i] != '%') /* Print normal characters */
+		if (str[i] != '%')
 		{
-			_putchar(str[i]);
+			ptr[n] = str[i];
 			n++;
 		}
-		else /* Handle format specifiers */
+		else
 		{
-			if (!str[i + 1]) /* Handle cases where '%' is at the end */
+			if (!str[i + 1])
 			{
-				return (-1);
+				err = -1;
 			}
 			if (   str[i + 1] == 'c' || str[i + 1] == 's' || str[i + 1] == '%'
 				|| str[i + 1] == 'i' || str[i + 1] == 'd' || str[i + 1] == 'b'
 				|| str[i + 1] == 'u' || str[i + 1] == 'o' || str[i + 1] == 'x'
 				|| str[i + 1] == 'X')
 			{
-				n += _format_caces(str[++i], &list);
+				m = _format_caces(str[++i], &list, &n, ptr);
+				if (m == 0)
+				{
+					break;
+				}
 			}
-			else /* Print '%' as a normal character if no valid specifier */
+			else if(err == 0)
 			{
-				_putchar('%');
+				ptr[n] = '%';
 				n++;
 			}
 		}
-
 		i++;
 	}
-
+	ptr[n] = '\0';
+	_putchar(ptr, n);
+	free(ptr);
 	va_end(list);
+	if (err != 0)
+	{
+		n = err;
+	}
 	return (n);
 }

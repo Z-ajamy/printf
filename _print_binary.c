@@ -8,15 +8,24 @@
  * Description: This function recursively divides the number by 2
  * to extract binary digits in the correct order.
  */
-void binary_rec(int *num_rec, unsigned int num)
+int binary_rec(unsigned int num, int *m, char *ptr)
 {
+	int a = 1;
 	if (num / 2)
 	{
-		binary_rec(num_rec, num / 2);
+		a = binary_rec(num / 2, m, ptr);
 	}
-
-	_putchar('0' + num % 2);
-	*num_rec = *num_rec + 1;
+	if (a == 0)
+	{
+		return 0;
+	}
+	ptr[*m] = ('0' + num % 2);
+	*m = *m +1;
+	if (*m == 1023)
+	{
+		return 0;
+	}
+	return 1;
 }
 
 /**
@@ -28,17 +37,24 @@ void binary_rec(int *num_rec, unsigned int num)
  *
  * Return: The total number of characters printed.
  */
-int _print_binary(va_list *list)
+int _print_binary(va_list *list, int *m, char *ptr)
 {
-	int num_rec = 0;
+	int a;
 	unsigned int num = va_arg(*list, unsigned int);
-
 	if (num == 0)
 	{
-		_putchar('0');
+		ptr[*m] = ('0');
+		*m = *m +1;
+		if (*m == 1023)
+		{
+			return (0);
+		}
 		return (1);
 	}
-
-	binary_rec(&num_rec, num);
-	return (num_rec);
+	a = binary_rec(num, m, ptr);
+	if (a == 0)
+	{
+		return 0;
+	}
+	return (1);
 }

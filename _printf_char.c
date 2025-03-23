@@ -6,8 +6,13 @@
  *
  * Return: Always returns 1 (one character printed).
  */
-int _printf_char(va_list *list)
+int _printf_char(va_list *list, int *m, char *ptr)
 {
-	_putchar(va_arg(*list, int));
+	ptr[*m] = (va_arg(*list, int));
+	*m = *m + 1;
+	if (*m == 1023)
+	{
+		return 0;
+	}
 	return (1);
 }
