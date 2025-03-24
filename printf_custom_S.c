@@ -3,7 +3,7 @@
 int printf_custom_S(va_list *list, char *p, int *k)
 {
     char *ptr = NULL;
-        int n = 0, x = 0, len = 0;
+        int n = 0, len = 0;
 
         ptr = va_arg(*list, char *);
         if (ptr == NULL)
@@ -19,7 +19,7 @@ int printf_custom_S(va_list *list, char *p, int *k)
                 {
                 Buffer_editor(p, k, '0');
                 }
-                _printf_HEX_rec(&x, (unsigned int)ptr[n], p, k);
+                _printf_HEX_rec(&len, (unsigned int)ptr[n], p, k);
                 len += 2;
             }
             else
