@@ -11,6 +11,7 @@
  
 int main(void)
 {
-	_printf("%S, %S\n","lol", "lol\na");
+	int n = _printf("%S","\n");
+	printf("%d\n", n);
 	return (0);
 }

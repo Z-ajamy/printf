@@ -36,5 +36,5 @@ int printf_custom_S(va_list *list, char *p, int *k)
                 n++;
         }
 
-        return (n + x - 1);
+        return (n + x);
 }
