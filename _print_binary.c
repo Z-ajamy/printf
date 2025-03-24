@@ -1,12 +1,15 @@
 #include "main.h"
 
 /**
- * binary_rec - Recursively prints the binary representation of a number
- * @num_rec: Pointer to an integer that counts the number of printed digits
- * @num: The unsigned integer to be converted and printed in binary
+ * binary_rec - Recursively prints the binary representation of a number.
+ * @num_rec: Pointer to an integer that counts the number of printed digits.
+ * @num: The unsigned integer to be converted and printed in binary.
+ * @ptr: Pointer to the buffer where the binary digits are stored.
+ * @k: Pointer to the index of the buffer.
  *
- * Description: This function recursively divides the number by 2
- * to extract binary digits in the correct order.
+ * Description:
+ * This function recursively divides the number by 2 to extract binary digits
+ * in the correct order and stores them in the buffer using Buffer_editor.
  */
 void binary_rec(int *num_rec, unsigned int num, char *ptr, int *k)
 {
@@ -20,11 +23,14 @@ void binary_rec(int *num_rec, unsigned int num, char *ptr, int *k)
 }
 
 /**
- * _print_binary - Converts an unsigned integer to binary and prints it
- * @list: Argument list containing the number to convert
+ * _print_binary - Converts an unsigned integer to binary and prints it.
+ * @list: Argument list containing the number to convert.
+ * @ptr: Pointer to the buffer where the binary digits are stored.
+ * @k: Pointer to the index of the buffer.
  *
- * Description: Extracts an unsigned integer from the argument list and
- * prints its binary representation using recursion.
+ * Description:
+ * Extracts an unsigned integer from the argument list and prints its binary
+ * representation using recursion. If the number is zero, it directly stores '0'.
  *
  * Return: The total number of characters printed.
  */
