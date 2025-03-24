@@ -40,5 +40,10 @@ void Buffer_editor(char *ptr, int *k, char c);
 
 int printf_custom_S(va_list *list, char *p, int *k);
 
+int _printf_pointer(va_list *list, char *ptr, int *k);
+void _printf_hex_ptr(int *n, unsigned long int num, char *ptr, int *k);
+
+
+
 
 #endif /* MAIN_H */

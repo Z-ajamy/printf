@@ -52,5 +52,9 @@ int _format_caces(char f, va_list *list, char *ptr, int *k)
 	{
 		n = printf_custom_S(list, ptr, k);
 	}
+	if (f == 'p')
+	{
+		n = _printf_pointer(list, ptr, k);
+	}
 	return (n);
 }
