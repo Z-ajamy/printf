@@ -34,6 +34,6 @@ int printf_custom_S(va_list *list, char *p, int *k)
             }
                 n++;
         }
-
+        n = (n > 1 ? n-1 : n);
         return (n + x);
 }
