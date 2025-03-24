@@ -6,6 +6,14 @@
 #include <unistd.h>
 #include <stdio.h>
 
+typedef struct
+{
+    char c;
+    int (*ptr)(va_list *list, char *ptr, int *k);
+} char_case;
+
+
+
 int _printf(const char *str, ...);
 
 int _format_caces(char f, va_list *list, char *ptr, int *k);
