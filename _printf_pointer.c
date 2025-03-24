@@ -31,7 +31,7 @@ int _printf_pointer(va_list *list, char *ptr, int *k)
 	int n = 0;
 
 	num = va_arg(*list, unsigned long int);
-    if (num == 8)
+    if (num == 0)
     {
         char *str = "(nil)";
         _printf_strings(&n, str, ptr, k);
@@ -55,5 +55,6 @@ void _printf_strings(int *n,char *str, char *ptr, int *k)
     {
         Buffer_editor(ptr, k, str[i]);
         *n = *n + 1;
+        i++;
     }
 }

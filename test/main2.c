@@ -11,8 +11,8 @@
  
 int main(void)
 {
-	int n = _printf("%p\n", (void *)0x7fff5100b608);
-	int m = printf("%p\n",(void *)0x7fff5100b608);
+	int n = _printf("%p\n", (void *)NULL);
+	int m = printf("%p\n",(void *)NULL);
 	printf("%d %d\n", n, m);
 	return (0);
 }
