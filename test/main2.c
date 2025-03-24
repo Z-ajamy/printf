@@ -11,7 +11,6 @@
  
 int main(void)
 {
-	int len, len2;
 	_printf("%S, %S\n","lol", "lol\na");
 	return (0);
 }

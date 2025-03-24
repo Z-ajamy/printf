@@ -19,7 +19,7 @@ int _printf_str(va_list *list, char *p, int *k)
 
 	while (ptr[n])
 	{
-		Buffer_editor(ptr, k, (ptr[n]));
+		Buffer_editor(p, k, (ptr[n]));
 		n++;
 	}
 
