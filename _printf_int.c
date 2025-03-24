@@ -14,14 +14,7 @@ void print_num_rec(int *num_rec, int num, char *ptr, int *k)
 	{
 		print_num_rec(num_rec, num / 10, ptr, k);
 	}
-
-	ptr[*k] = ('0' + num % 10);
-	*k = *k +1;
-	if (*k == 1024)
-	{
-		_putchar(ptr, k);
-		*k = 0;
-	}
+	Buffer_editor(ptr, k, ('0' + num % 10));
 	(*num_rec)++;
 }
 
@@ -44,13 +37,8 @@ int _printf_int(va_list *list, char *ptr, int *k)
 
 	if (num < 0)
 	{
-		ptr[*k] = ('-');
-		*k = *k +1;
-		if (*k == 1024)
-		{
-			_putchar(ptr, k);
-			*k = 0;
-		}
+		Buffer_editor(ptr, k, ('-'));
+
 		n++;
 		if (num < -2147483647) /* Handles INT_MIN case */
 		{
@@ -64,13 +52,7 @@ int _printf_int(va_list *list, char *ptr, int *k)
 
 	if (big)
 	{
-		ptr[*k] = ('0' + 8);
-		*k = *k +1;
-		if (*k == 1024)
-		{
-			_putchar(ptr, k);
-			*k = 0;
-		} /* Adds back the last digit of INT_MIN */
+		Buffer_editor(ptr, k, ('0' + 8));
 		n++;
 	}
 	return (n);

@@ -14,14 +14,8 @@ void _printf_oct_rec(int *n, unsigned int num, char *ptr, int *k)
 	{
 		_printf_oct_rec(n, num / 8, ptr, k);
 	}
+	Buffer_editor(ptr, k, ('0' + num % 8));
 
-	ptr[*k] = ('0' + num % 8);
-				*k = *k +1;
-				if (*k == 1024)
-				{
-					_putchar(ptr, k);
-					*k = 0;
-				}
 	*n = *n + 1;
 }
 

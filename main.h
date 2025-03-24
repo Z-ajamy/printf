@@ -13,7 +13,7 @@ int _putchar(char* ptr, int *k);
 
 
 int _printf_char(va_list *list, char *ptr, int *k);
-int _printf_str(va_list *list, char *ptr, int *k);
+int _printf_str(va_list *list, char *p, int *k);
 
 
 
@@ -35,6 +35,10 @@ void _printf_hex_rec(int *n, unsigned int num, char *ptr, int *k);
 
 int _printf_HEX(va_list *list, char *ptr, int *k);
 void _printf_HEX_rec(int *n, unsigned int num, char *ptr, int *k);
+
+void Buffer_editor(char *ptr, int *k, char c);
+
+int printf_custom_S(va_list *list, char *p, int *k);
 
 
 #endif /* MAIN_H */

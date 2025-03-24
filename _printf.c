@@ -27,13 +27,8 @@ int _printf(const char *str, ...)
 	{
 		if (str[i] != '%') /* Print normal characters */
 		{
-			ptr[k] = (str[i]);
-			k++;
-			if (k == 1024)
-			{
-				_putchar(ptr, &k);
-				k = 0;
-			}
+			Buffer_editor(ptr, &k, (str[i]));
+
 			n++;
 		}
 		else /* Handle format specifiers */
@@ -46,19 +41,13 @@ int _printf(const char *str, ...)
 			if (   str[i + 1] == 'c' || str[i + 1] == 's' || str[i + 1] == '%'
 				|| str[i + 1] == 'i' || str[i + 1] == 'd' || str[i + 1] == 'b'
 				|| str[i + 1] == 'u' || str[i + 1] == 'o' || str[i + 1] == 'x'
-				|| str[i + 1] == 'X')
+				|| str[i + 1] == 'X' || str[i + 1] == 'S')
 			{
 				n += _format_caces(str[++i], &list, ptr, &k);
 			}
 			else /* Print '%' as a normal character if no valid specifier */
 			{
-				ptr[k] = ('%');
-				k++;
-				if (k == 1024)
-				{
-					_putchar(ptr, &k);
-					k = 0;
-				}
+				Buffer_editor(ptr, &k, ('%'));
 				n++;
 			}
 		}

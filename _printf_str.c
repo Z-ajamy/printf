@@ -19,13 +19,7 @@ int _printf_str(va_list *list, char *p, int *k)
 
 	while (ptr[n])
 	{
-		p[*k] = (ptr[n]);
-		*k = *k +1;
-		if (*k == 1024)
-		{
-			_putchar(p, k);
-			*k = 0;
-		}
+		Buffer_editor(ptr, k, (ptr[n]));
 		n++;
 	}
 

@@ -8,12 +8,6 @@
  */
 int _printf_char(va_list *list, char *ptr, int *k)
 {
-	ptr[*k] = (va_arg(*list, int));
-	*k = *k +1;
-	if (*k == 1024)
-	{
-		_putchar(ptr, k);
-		*k = 0;
-	}
+	Buffer_editor(ptr, k, (va_arg(*list, int)));
 	return (1);
 }

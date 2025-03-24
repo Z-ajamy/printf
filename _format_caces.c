@@ -13,13 +13,7 @@ int _format_caces(char f, va_list *list, char *ptr, int *k)
 
 	if (f == '%')
 	{
-		ptr[*k] = ('%');
-		*k = *k +1;
-		if (*k == 1024)
-		{
-			_putchar(ptr, k);
-			*k = 0;
-		};
+		Buffer_editor(ptr, k, '%');
 		n++;
 	}
 	if (f == 'c')
@@ -54,6 +48,9 @@ int _format_caces(char f, va_list *list, char *ptr, int *k)
 	{
 		n = _printf_HEX(list, ptr, k);
 	}
-
+	if (f == 'S')
+	{
+		n = printf_custom_S(list, ptr, k);
+	}
 	return (n);
 }

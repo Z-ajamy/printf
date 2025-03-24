@@ -21,23 +21,11 @@ void _printf_HEX_rec(int *n, unsigned int num, char *ptr, int *k)
 
 	if (a >= 0 && a <= 9)
 	{
-		ptr[*k] = ('0' + a);
-				*k = *k +1;
-				if (*k == 1024)
-				{
-					_putchar(ptr, k);
-					*k = 0;
-				}
+		Buffer_editor(ptr, k, ('0' + a));
 	}
 	else
 	{
-		ptr[*k] = ('A' + (a - 10));
-				*k = *k +1;
-				if (*k == 1024)
-				{
-					_putchar(ptr, k);
-					*k = 0;
-				}
+		Buffer_editor(ptr, k, ('A' + (a - 10)));
 	}
 
 	*n = *n + 1;
