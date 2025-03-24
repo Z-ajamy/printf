@@ -3,7 +3,7 @@
 int printf_custom_S(va_list *list, char *p, int *k)
 {
     char *ptr = NULL;
-        int n = 0, len = 0;
+        int n = 0, x = 0;
 
         ptr = va_arg(*list, char *);
         if (ptr == NULL)
@@ -15,19 +15,26 @@ int printf_custom_S(va_list *list, char *p, int *k)
             {
                 Buffer_editor(p, k, '\\');
                 Buffer_editor(p, k, 'x');
+                x += 2;
                 if (!((int)ptr[n] / 16))
                 {
-                Buffer_editor(p, k, '0');
+                    p[*k] = ('0');
+                    *k = *k + 1;
+                    if (*k == 1024)
+                    {
+                        _putchar(p, k);
+                        *k = 0;
+                    }
+                    x++;
                 }
-                _printf_HEX_rec(&len, (unsigned int)ptr[n], p, k);
-                len += 2;
+                _printf_HEX_rec(&x, (unsigned int)ptr[n], p, k);
             }
             else
             {
                 Buffer_editor(p, k, (ptr[n]));
-                len++;
             }
                 n++;
         }
-        return (len);
+
+        return (n + x);
 }
