@@ -25,7 +25,6 @@ int printf_custom_S(va_list *list, char *p, int *k)
                         _putchar(p, k);
                         *k = 0;
                     }
-                    x++;
                 }
                 _printf_HEX_rec(&x, (unsigned int)ptr[n], p, k);
             }
