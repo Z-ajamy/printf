@@ -1,16 +1,30 @@
 #include "main.h"
-
-/**
- * _printf - Custom implementation of printf function.
- * @str: The format string containing characters and format specifiers.
+/*
+ * File: _printf.c
+ * Auth: Abd Al-rahman Al-jamy
  *
  * Description:
- * This function takes a format string and additional arguments,
- * processes format specifiers, and prints the formatted output accordingly.
- *
- * Return: The total number of characters printed (excluding null byte),
- * or -1 if an error occurs.
+ * This file contains the implementation of the `_printf` function,
+ * a simplified version of the standard `printf` function.
+ * It processes a format string and variadic arguments, handling
+ * various format specifiers and buffering the output before
+ * printing it to standard output.
  */
+
+ #include "main.h"
+
+ /**
+  * _printf - Custom printf function to format and print data.
+  * @str: The format string containing characters and format specifiers.
+  *
+  * Description:
+  * This function takes a format string and a variable number of arguments,
+  * processes them, and prints the formatted output. It supports various
+  * format specifiers using helper functions.
+  *
+  * Return: The number of characters printed (excluding null byte),
+  * or -1 if an error occurs.
+  */
 int _printf(const char *str, ...)
 {
 	int i = 0, n = 0, k = 0; /* Iterators and character counters */
@@ -24,7 +38,7 @@ int _printf(const char *str, ...)
 	/* Allocate memory dynamically for the buffer */
 	ptr = (char *)malloc(sizeof(char) * 1024);
 	if (!ptr)
-		return (-1);
+		return -1;	
 
 	/* Initialize the variadic argument list */
 	va_start(list, str);
@@ -38,10 +52,10 @@ int _printf(const char *str, ...)
 			Buffer_editor(ptr, &k, (str[i])); /* Store character in buffer */
 			n++; /* Increase the count of printed characters */
 		}
-		else /* Handle format specifiers */
+		else  /* Handle format specifiers */
 		{
 			/* Edge case: '%' at the end of string without a specifier */
-			if (!str[i + 1])
+			if (!str[i + 1]) /* Handle cases where '%' is at the end */
 			{
 				n = -1;
 				break;
@@ -49,11 +63,12 @@ int _printf(const char *str, ...)
 			/* Process format specifier and update character count */
 			n += _format_caces(str[++i], &list, ptr, &k);
 		}
-		i++; /* Move to the next character */
+		i++;
 	}
 
 	/* Print the final formatted buffer output */
 	_putchar(ptr, &k);
+
 
 	/* Free allocated memory */
 	free(ptr);
