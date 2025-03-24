@@ -1,12 +1,14 @@
 #include "main.h"
 
 /**
- * print_num_rec - Recursively prints digits of an integer
- * @num_rec: Pointer to an integer that keeps track of printed digits
- * @num: The number to be printed
+ * print_num_rec - Recursively prints an integer digit by digit
+ * @num_rec: Pointer to an integer tracking the number of digits printed
+ * @num: The integer to print
+ * @ptr: Pointer to the buffer where characters are stored
+ * @k: Pointer to the buffer index
  *
  * Description: This function recursively divides the number by 10
- * and prints its digits one by one, ensuring correct order.
+ * to extract and print each digit in the correct order.
  */
 void print_num_rec(int *num_rec, int num, char *ptr, int *k)
 {
@@ -19,11 +21,13 @@ void print_num_rec(int *num_rec, int num, char *ptr, int *k)
 }
 
 /**
- * _printf_int - Prints an integer
+ * _printf_int - Prints an integer using a buffer system
  * @list: Argument list containing the integer to print
+ * @ptr: Pointer to the buffer where characters are stored
+ * @k: Pointer to the buffer index
  *
- * Description: Extracts an integer from the argument list, handles negative
- * values by printing a '-' sign, and correctly prints INT_MIN.
+ * Description: Extracts an integer from the argument list,
+ * handles negative numbers, and prints the integer recursively.
  *
  * Return: The total number of characters printed.
  */
@@ -38,7 +42,6 @@ int _printf_int(va_list *list, char *ptr, int *k)
 	if (num < 0)
 	{
 		Buffer_editor(ptr, k, ('-'));
-
 		n++;
 		if (num < -2147483647) /* Handles INT_MIN case */
 		{
@@ -55,5 +58,6 @@ int _printf_int(va_list *list, char *ptr, int *k)
 		Buffer_editor(ptr, k, ('0' + 8));
 		n++;
 	}
+
 	return (n);
 }
