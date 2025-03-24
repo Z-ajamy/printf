@@ -11,7 +11,7 @@
  
 int main(void)
 {
-	int n = _printf("%S","nb");
+	int n = _printf("%S", "hhg\n");
 	printf("%d\n", n);
 	return (0);
 }
