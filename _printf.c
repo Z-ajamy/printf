@@ -1,80 +1,62 @@
 #include "main.h"
-/*
- * File: _printf.c
- * Auth: Abd Al-rahman Al-jamy
+
+/**
+ * _printf - Custom implementation of printf function.
+ * @str: The format string containing directives.
  *
- * Description:
- * This file contains the implementation of the `_printf` function,
- * a simplified version of the standard `printf` function.
- * It processes a format string and variadic arguments, handling
- * various format specifiers and buffering the output before
- * printing it to standard output.
+ * Description: Prints formatted output based on the provided format string.
+ * Supports %c (character), %s (string), and %% (percentage symbol).
+ *
+ * Return: The number of characters printed.
  */
-
- #include "main.h"
-
- /**
-  * _printf - Custom printf function to format and print data.
-  * @str: The format string containing characters and format specifiers.
-  *
-  * Description:
-  * This function takes a format string and a variable number of arguments,
-  * processes them, and prints the formatted output. It supports various
-  * format specifiers using helper functions.
-  *
-  * Return: The number of characters printed (excluding null byte),
-  * or -1 if an error occurs.
-  */
 int _printf(const char *str, ...)
 {
-	int i = 0, n = 0, k = 0; /* Iterators and character counters */
-	char *ptr; /* Buffer for storing the formatted output */
-	va_list list; /* List to process variadic function arguments */
+	int i = 0, n = 0, k = 0;
+	char *ptr;
+	va_list list;
 
-	/* Check if the format string is NULL */
 	if (!str)
 		return (-1);
-
-	/* Allocate memory dynamically for the buffer */
 	ptr = (char *)malloc(sizeof(char) * 1024);
 	if (!ptr)
 		return -1;	
 
-	/* Initialize the variadic argument list */
 	va_start(list, str);
 
-	/* Loop through the format string */
 	while (str[i])
 	{
-		/* If character is not '%' print normally */
-		if (str[i] != '%')
+		if (str[i] != '%') /* Print normal characters */
 		{
-			Buffer_editor(ptr, &k, (str[i])); /* Store character in buffer */
-			n++; /* Increase the count of printed characters */
+			Buffer_editor(ptr, &k, (str[i]));
+
+			n++;
 		}
-		else  /* Handle format specifiers */
+		else /* Handle format specifiers */
 		{
-			/* Edge case: '%' at the end of string without a specifier */
 			if (!str[i + 1]) /* Handle cases where '%' is at the end */
 			{
 				n = -1;
 				break;
 			}
-			/* Process format specifier and update character count */
-			n += _format_caces(str[++i], &list, ptr, &k);
+			if (   str[i + 1] == 'c' || str[i + 1] == 's' || str[i + 1] == '%'
+				|| str[i + 1] == 'i' || str[i + 1] == 'd' || str[i + 1] == 'b'
+				|| str[i + 1] == 'u' || str[i + 1] == 'o' || str[i + 1] == 'x'
+				|| str[i + 1] == 'X' || str[i + 1] == 'S' || str[i + 1] == 'p')
+			{
+				n += _format_caces(str[++i], &list, ptr, &k);
+			}
+			else /* Print '%' as a normal character if no valid specifier */
+			{
+				Buffer_editor(ptr, &k, ('%'));
+				n++;
+			}
 		}
 		i++;
 	}
 
-	/* Print the final formatted buffer output */
 	_putchar(ptr, &k);
 
-
-	/* Free allocated memory */
 	free(ptr);
-
-	/* End processing of variadic arguments */
 	va_end(list);
-
-	return (n); /* Return the total number of printed characters */
+	return (n);
 }
