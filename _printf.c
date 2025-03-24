@@ -18,6 +18,8 @@ int _printf(const char *str, ...)
 	if (!str)
 		return (-1);
 	ptr = (char *)malloc(sizeof(char) * 1024);
+	if (!ptr)
+		return -1;	
 
 	va_start(list, str);
 
