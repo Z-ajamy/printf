@@ -15,7 +15,14 @@ void binary_rec(int *num_rec, unsigned int num, char *ptr, int *k)
 		binary_rec(num_rec, num / 2, ptr, k);
 	}
 
-	Buffer_editor(ptr, k, ('0' + num % 2));
+	ptr[*k] = ('0' + num % 2);
+				*k = *k +1;
+				if (*k == 1024)
+				{
+					_putchar(ptr, k);
+					*k = 0;
+				}
+	*num_rec = *num_rec + 1;
 }
 
 /**
@@ -34,7 +41,13 @@ int _print_binary(va_list *list, char *ptr, int *k)
 
 	if (num == 0)
 	{
-		Buffer_editor(ptr, k, ('0'));
+		ptr[*k] = ('0');
+		*k = *k +1;
+		if (*k == 1024)
+		{
+			_putchar(ptr, k);
+			*k = 0;
+		}
 		return (1);
 	}
 
