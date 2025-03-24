@@ -43,6 +43,7 @@ int printf_custom_S(va_list *list, char *p, int *k);
 int _printf_pointer(va_list *list, char *ptr, int *k);
 void _printf_hex_ptr(int *n, unsigned long int num, char *ptr, int *k);
 
+void _printf_strings(int *n,char *str, char *ptr, int *k);
 
 
 
