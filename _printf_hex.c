@@ -1,6 +1,6 @@
 #include "main.h"
 
-void _printf_hex_rec(int *n, unsigned int num, char *ptr, int *k)
+void _printf_hex_rec(int *n, unsigned long num, char *ptr, int *k)
 {
 	int a;
 
@@ -25,10 +25,10 @@ void _printf_hex_rec(int *n, unsigned int num, char *ptr, int *k)
 
 int _printf_hex(va_list *list, char *ptr, int *k)
 {
-	unsigned int num;
+	unsigned long num;
 	int n = 0;
 
-	num = va_arg(*list, unsigned int);
+	num = va_arg(*list, unsigned long);
 
 	_printf_hex_rec(&n, num, ptr, k);
 	return (n);
