@@ -34,6 +34,10 @@ int printf_custom_S(va_list *list, char *p, int *k)
             }
                 n++;
         }
-
+        if (n > 1&& x >= 1)
+        {
+            n = n - 1;
+        }
+        
         return (n + x);
 }
