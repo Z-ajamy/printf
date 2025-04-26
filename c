@@ -1,16 +1,5 @@
 #include "main.h"
 
-/**
- * Buffer_editor - Manages the buffer and writes characters into it.
- * @p: Pointer to the buffer where characters are stored.
- * @k: Pointer to the index of the buffer.
- * @c: The character to be stored in the buffer.
- *
- * Description:
- * This function places a character into the buffer at the current index and
- * increments the index. If the buffer reaches its limit (1024 characters),
- * it flushes the buffer using _putchar and resets the index to 0.
- */
 void Buffer_editor(char *p, int *k, char c)
 {
 	p[*k] = c;
@@ -25,31 +14,6 @@ void Buffer_editor(char *p, int *k, char c)
 }
 #include "main.h"
 
-/**
- * _format_caces - Handles specific format specifiers.
- * @f: The format specifier character.
- * @list: The argument list containing values to be printed.
- * @ptr: Pointer to the buffer where formatted output is stored.
- * @k: Pointer to the index of the buffer.
- *
- * Description:
- * This function processes a given format specifier and calls the corresponding
- * helper function to format and store the output into the buffer.
- * It supports the following format specifiers:
- * - %c : Prints a single character.
- * - %s : Prints a string.
- * - %% : Prints the percentage symbol.
- * - %d, %i : Prints an integer.
- * - %b : Prints an unsigned integer in binary.
- * - %u : Prints an unsigned decimal integer.
- * - %o : Prints an unsigned octal integer.
- * - %x : Prints an unsigned hexadecimal integer (lowercase).
- * - %X : Prints an unsigned hexadecimal integer (uppercase).
- * - %S : Prints a string with non-printable characters in \x format.
- * - %p : Prints a pointer address.
- *
- * Return: The number of characters printed.
- */
 int _format_caces(char f, va_list *list, char *ptr, int *k)
 {
 	int n = 0; /* Variable to keep track of the number of characters printed */
@@ -116,17 +80,6 @@ int _format_caces(char f, va_list *list, char *ptr, int *k)
 }
 #include "main.h"
 
-/**
- * binary_rec - Recursively prints the binary representation of a number.
- * @num_rec: Pointer to an integer that counts the number of printed digits.
- * @num: The unsigned integer to be converted and printed in binary.
- * @ptr: Pointer to the buffer where the binary digits are stored.
- * @k: Pointer to the index of the buffer.
- *
- * Description:
- * This function recursively divides the number by 2 to extract binary digits
- * in the correct order and stores them in the buffer using Buffer_editor.
- */
 void binary_rec(int *num_rec, unsigned int num, char *ptr, int *k)
 {
 	if (num / 2)
@@ -138,18 +91,6 @@ void binary_rec(int *num_rec, unsigned int num, char *ptr, int *k)
 	*num_rec = *num_rec + 1;
 }
 
-/**
- * _print_binary - Converts an unsigned integer to binary and prints it.
- * @list: Argument list containing the number to convert.
- * @ptr: Pointer to the buffer where the binary digits are stored.
- * @k: Pointer to the index of the buffer.
- *
- * Description:
- * Extracts an unsigned integer from the argument list and prints its binary
- * representation using recursion. If the number is zero, it directly stores '0'.
- *
- * Return: The total number of characters printed.
- */
 int _print_binary(va_list *list, char *ptr, int *k)
 {
 	int num_rec = 0;
@@ -166,18 +107,6 @@ int _print_binary(va_list *list, char *ptr, int *k)
 }
 #include "main.h"
 
-/**
- * _print_Uint - Prints an unsigned integer.
- * @list: Argument list containing the number to print.
- * @ptr: Pointer to the buffer where the number is stored.
- * @k: Pointer to the index of the buffer.
- *
- * Description:
- * This function extracts an unsigned integer from the argument list
- * and prints it using recursion.
- *
- * Return: The total number of characters printed.
- */
 int _print_Uint(va_list *list, char *ptr, int *k)
 {
 	int n = 0;
@@ -189,17 +118,6 @@ int _print_Uint(va_list *list, char *ptr, int *k)
 	return (n);
 }
 
-/**
- * print_Unum_rec - Recursively prints an unsigned integer.
- * @num_rec: Pointer to an integer that counts the number of printed digits.
- * @num: The unsigned integer to be printed.
- * @ptr: Pointer to the buffer where the number is stored.
- * @k: Pointer to the index of the buffer.
- *
- * Description:
- * This function recursively divides the number by 10 to extract digits
- * in the correct order and stores them in the buffer using Buffer_editor.
- */
 void print_Unum_rec(int *num_rec, unsigned int num, char *ptr, int *k)
 {
 	if (num / 10)
@@ -213,62 +131,33 @@ void print_Unum_rec(int *num_rec, unsigned int num, char *ptr, int *k)
 }
 #include "main.h"
 
-/**
- * _printf - Custom implementation of the printf function.
- * @str: The format string containing directives.
- *
- * Description:
- * This function prints formatted output based on the provided format string.
- * It supports the following format specifiers:
- * - %c : Prints a single character.
- * - %s : Prints a string.
- * - %% : Prints the percentage symbol.
- * - %i, %d : Prints an integer.
- * - %b : Prints an unsigned integer in binary.
- * - %u : Prints an unsigned decimal integer.
- * - %o : Prints an unsigned octal integer.
- * - %x, %X : Prints an unsigned hexadecimal integer (lowercase/uppercase).
- * - %S : Prints a string with non-printable characters in \x format.
- * - %p : Prints a pointer address.
- *
- * Return: The number of characters printed, or -1 on failure.
- */
+
 int _printf(const char *str, ...)
 {
 	int i = 0, n = 0, k = 0; /* i for iteration, n for char count, k for buffer index */
 	char *ptr; /* Pointer to dynamically allocated memory for buffer */
 	va_list list; /* Variable argument list */
 
-	/* Handle NULL format string */
-	if (!str)
+	if (!str)/* Handle NULL format string */
 		return (-1);
-
-	/* Allocate memory for the buffer (size 1024) */
-	ptr = (char *)malloc(sizeof(char) * 1024);
+	ptr = (char *)malloc(sizeof(char) * BUFF_SIZE);/* Allocate memory for the buffer (size BUFF_SIZE) */
 	if (!ptr)
 		return (-1);
-
-	/* Initialize the variable argument list */
-	va_start(list, str);
-
-	/* Loop through each character in the format string */
-	while (str[i])
+	va_start(list, str);/* Initialize the variable argument list */
+	while (str[i])/* Loop through each character in the format string */
 	{
-		/* If current character is not '%', print it normally */
-		if (str[i] != '%')
+		if (str[i] != '%')/* If current character is not '%', print it normally */
 		{
 			Buffer_editor(ptr, &k, str[i]); /* Store character in buffer */
 			n++; /* Increment character count */
 		}
 		else /* Handle format specifiers */
 		{
-			/* Check if '%' is at the end without a valid specifier */
-			if (!str[i + 1])
+			if (!str[i + 1])/* Check if '%' is at the end without a valid specifier */
 			{
 				n = -1; /* Invalid format string */
 				break;
 			}
-
 			/* Check for supported format specifiers */
 			if (str[i + 1] == 'c' || str[i + 1] == 's' || str[i + 1] == '%'
 				|| str[i + 1] == 'i' || str[i + 1] == 'd' || str[i + 1] == 'b'
@@ -285,30 +174,14 @@ int _printf(const char *str, ...)
 		}
 		i++; /* Move to the next character */
 	}
+	_putchar(ptr, &k);/* Print the buffer contents */
 
-	/* Print the buffer contents */
-	_putchar(ptr, &k);
-
-	/* Free allocated memory and end variable argument list */
-	free(ptr);
+	free(ptr);/* Free allocated memory and end variable argument list */
 	va_end(list);
-
-	/* Return the total number of characters printed */
-	return (n);
+	return (n);/* Return the total number of characters printed */
 }
 #include "main.h"
 
-/**
- * _printf_HEX_rec - Recursively prints the uppercase hexadecimal representation of a number
- * @n: Pointer to an integer that keeps track of the number of printed digits
- * @num: The unsigned integer to be converted and printed in uppercase hexadecimal
- * @ptr: Pointer to the buffer where the output is stored
- * @k: Pointer to the index of the buffer
- *
- * Description: This function recursively divides the number by 16
- * to extract hexadecimal digits in the correct order and stores
- * them in the buffer for formatted output.
- */
 void _printf_HEX_rec(int *n, unsigned int num, char *ptr, int *k)
 {
 	int a;
@@ -332,17 +205,6 @@ void _printf_HEX_rec(int *n, unsigned int num, char *ptr, int *k)
 	*n = *n + 1;
 }
 
-/**
- * _printf_HEX - Converts an unsigned integer to uppercase hexadecimal and prints it
- * @list: Argument list containing the number to convert
- * @ptr: Pointer to the buffer where the output is stored
- * @k: Pointer to the index of the buffer
- *
- * Description: Extracts an unsigned integer from the argument list and
- * prints its uppercase hexadecimal representation using recursion.
- *
- * Return: The total number of characters printed.
- */
 int _printf_HEX(va_list *list, char *ptr, int *k)
 {
 	unsigned int num;
@@ -355,19 +217,6 @@ int _printf_HEX(va_list *list, char *ptr, int *k)
 }
 #include "main.h"
 
-/**
- * _printf_char - Prints a character from the argument list.
- * @list: The argument list containing the character to be printed.
- * @ptr: Pointer to the buffer where the character will be stored.
- * @k: Pointer to the index of the buffer.
- *
- * Description:
- * This function extracts a character from the variable argument list and
- * stores it in the buffer using the Buffer_editor function. It returns 1
- * since only one character is printed.
- *
- * Return: The number of characters printed (always 1).
- */
 int _printf_char(va_list *list, char *ptr, int *k)
 {
 	Buffer_editor(ptr, k, (va_arg(*list, int)));
@@ -375,17 +224,6 @@ int _printf_char(va_list *list, char *ptr, int *k)
 }
 #include "main.h"
 
-/**
- * _printf_hex_rec - Recursively converts and prints an unsigned integer
- *                   in lowercase hexadecimal format.
- * @n: Pointer to an integer tracking the number of characters printed.
- * @num: The unsigned integer to be converted and printed.
- * @ptr: Pointer to the buffer where formatted output is stored.
- * @k: Pointer to the index of the buffer.
- *
- * Description: This function recursively divides the number by 16
- *              to extract hexadecimal digits in the correct order.
- */
 void _printf_hex_rec(int *n, unsigned int num, char *ptr, int *k)
 {
 	int a;
@@ -409,18 +247,6 @@ void _printf_hex_rec(int *n, unsigned int num, char *ptr, int *k)
 	*n = *n + 1;
 }
 
-/**
- * _printf_hex - Converts an unsigned integer to lowercase hexadecimal
- *               and prints it.
- * @list: Argument list containing the number to convert.
- * @ptr: Pointer to the buffer where formatted output is stored.
- * @k: Pointer to the index of the buffer.
- *
- * Description: Extracts an unsigned integer from the argument list and
- *              prints its lowercase hexadecimal representation using recursion.
- *
- * Return: The total number of characters printed.
- */
 int _printf_hex(va_list *list, char *ptr, int *k)
 {
 	unsigned int num;
@@ -433,16 +259,6 @@ int _printf_hex(va_list *list, char *ptr, int *k)
 }
 #include "main.h"
 
-/**
- * print_num_rec - Recursively prints an integer digit by digit
- * @num_rec: Pointer to an integer tracking the number of digits printed
- * @num: The integer to print
- * @ptr: Pointer to the buffer where characters are stored
- * @k: Pointer to the buffer index
- *
- * Description: This function recursively divides the number by 10
- * to extract and print each digit in the correct order.
- */
 void print_num_rec(int *num_rec, int num, char *ptr, int *k)
 {
 	if (num / 10)
@@ -453,17 +269,6 @@ void print_num_rec(int *num_rec, int num, char *ptr, int *k)
 	(*num_rec)++;
 }
 
-/**
- * _printf_int - Prints an integer using a buffer system
- * @list: Argument list containing the integer to print
- * @ptr: Pointer to the buffer where characters are stored
- * @k: Pointer to the buffer index
- *
- * Description: Extracts an integer from the argument list,
- * handles negative numbers, and prints the integer recursively.
- *
- * Return: The total number of characters printed.
- */
 int _printf_int(va_list *list, char *ptr, int *k)
 {
 	int n = 0;
@@ -496,16 +301,6 @@ int _printf_int(va_list *list, char *ptr, int *k)
 }
 #include "main.h"
 
-/**
- * _printf_oct_rec - Recursively prints the octal representation of a number.
- * @n: Pointer to an integer that keeps track of the number of printed digits.
- * @num: The unsigned integer to be converted and printed in octal.
- * @ptr: Pointer to the buffer where characters will be stored.
- * @k: Pointer to the buffer index.
- *
- * Description: This function recursively divides the number by 8
- * to extract octal digits in the correct order.
- */
 void _printf_oct_rec(int *n, unsigned int num, char *ptr, int *k)
 {
 	if (num / 8)
@@ -517,17 +312,6 @@ void _printf_oct_rec(int *n, unsigned int num, char *ptr, int *k)
 	*n = *n + 1;
 }
 
-/**
- * _printf_oct - Converts an unsigned integer to octal and prints it.
- * @list: Argument list containing the number to convert.
- * @ptr: Pointer to the buffer where characters will be stored.
- * @k: Pointer to the buffer index.
- *
- * Description: Extracts an unsigned integer from the argument list
- * and prints its octal representation using recursion.
- *
- * Return: The total number of characters printed.
- */
 int _printf_oct(va_list *list, char *ptr, int *k)
 {
 	int n = 0;
@@ -540,17 +324,6 @@ int _printf_oct(va_list *list, char *ptr, int *k)
 }
 #include "main.h"
 
-/**
- * _printf_hex_ptr - Recursively converts an unsigned long integer to lowercase hexadecimal
- *                   and stores the result in a buffer.
- * @n: Pointer to an integer that keeps track of the number of characters printed.
- * @num: The unsigned long integer to be converted and stored as hexadecimal.
- * @ptr: Pointer to the buffer where the formatted output is stored.
- * @k: Pointer to the index of the buffer.
- *
- * Description: This function recursively divides the number by 16
- *              to extract hexadecimal digits in the correct order.
- */
 void _printf_hex_ptr(int *n, unsigned long int num, char *ptr, int *k)
 {
 	int a;
@@ -574,18 +347,6 @@ void _printf_hex_ptr(int *n, unsigned long int num, char *ptr, int *k)
 	*n = *n + 1;
 }
 
-/**
- * _printf_pointer - Prints the address of a pointer in hexadecimal format.
- * @list: Argument list containing the pointer to be printed.
- * @ptr: Pointer to the buffer where the formatted output is stored.
- * @k: Pointer to the index of the buffer.
- *
- * Description: Extracts a pointer from the argument list and prints its
- *              address in lowercase hexadecimal format, prefixed with "0x".
- *              If the pointer is NULL, it prints "(nil)" instead.
- *
- * Return: The total number of characters printed.
- */
 int _printf_pointer(va_list *list, char *ptr, int *k)
 {
 	unsigned long int num;
@@ -595,6 +356,7 @@ int _printf_pointer(va_list *list, char *ptr, int *k)
 	if (num == 0)
 	{
 		char *str = "(nil)";
+
 		_printf_strings(&n, str, ptr, k);
 		return (n);
 	}
@@ -607,16 +369,6 @@ int _printf_pointer(va_list *list, char *ptr, int *k)
 	return (n);
 }
 
-/**
- * _printf_strings - Prints a string to the buffer.
- * @n: Pointer to an integer that keeps track of the number of characters printed.
- * @str: Pointer to the string to be printed.
- * @ptr: Pointer to the buffer where the formatted output is stored.
- * @k: Pointer to the index of the buffer.
- *
- * Description: Iterates over the characters of the string and stores them in
- *              the buffer. If the string is NULL, the function does nothing.
- */
 void _printf_strings(int *n, char *str, char *ptr, int *k)
 {
 	int i = 0;
@@ -635,18 +387,6 @@ void _printf_strings(int *n, char *str, char *ptr, int *k)
 }
 #include "main.h"
 
-/**
- * _printf_str - Prints a string from the argument list.
- * @list: Argument list containing the string to print.
- * @p: Pointer to the buffer where characters will be stored.
- * @k: Pointer to the buffer index.
- *
- * Description: Extracts a string from the argument list
- * and prints it character by character. If the string is NULL,
- * it prints "(null)" instead.
- *
- * Return: The total number of characters printed.
- */
 int _printf_str(va_list *list, char *p, int *k)
 {
 	char *ptr = NULL;
@@ -666,34 +406,12 @@ int _printf_str(va_list *list, char *p, int *k)
 }
 #include "main.h"
 
-/**
- * _putchar - Writes the contents of a buffer to standard output.
- * @ptr: Pointer to the buffer containing the characters to print.
- * @k: Pointer to an integer representing the number of characters to write.
- *
- * Description: This function writes the first *k characters from the buffer
- * pointed to by ptr to the standard output using the write system call.
- *
- * Return: The number of bytes written on success, or -1 on failure.
- */
 int _putchar(char *ptr, int *k)
 {
 	return (write(1, ptr, *k));
 }
 #include "main.h"
 
-/**
- * printf_custom_S - Prints a string, replacing non-printable characters.
- * @list: Argument list containing the string to print.
- * @p: Pointer to the buffer where the formatted output is stored.
- * @k: Pointer to an integer tracking the buffer index.
- *
- * Description: This function prints a string, but replaces non-printable
- * ASCII characters (values < 32 or ≥ 127) with their hexadecimal
- * representation prefixed by "\x".
- *
- * Return: The total number of characters added to the buffer.
- */
 int printf_custom_S(va_list *list, char *p, int *k)
 {
 	char *ptr = NULL;
@@ -728,3 +446,59 @@ int printf_custom_S(va_list *list, char *p, int *k)
 	}
 	return (n + x - temp);
 }
+#ifndef MAIN_H
+#define MAIN_H
+
+#define BUFF_SIZE 1024
+
+
+
+#include <stdlib.h>
+#include <stdarg.h>
+#include <unistd.h>
+#include <stdio.h>
+
+typedef struct
+{
+	char c;
+	int (*ptr)(va_list *list, char *ptr, int *k);
+} char_case;
+
+int _printf(const char *str, ...);
+
+
+int _format_caces(char f, va_list *list, char *ptr, int *k);
+
+int _putchar(char *ptr, int *k);
+
+/* Functions to handle specific format specifiers */
+int _printf_char(va_list *list, char *ptr, int *k);
+int _printf_str(va_list *list, char *p, int *k);
+int _printf_int(va_list *list, char *ptr, int *k);
+void print_num_rec(int *num_rec, int num, char *ptr, int *k);
+
+int _print_binary(va_list *list, char *ptr, int *k);
+void binary_rec(int *num_rec, unsigned int num, char *ptr, int *k);
+
+int _print_Uint(va_list *list, char *ptr, int *k);
+void print_Unum_rec(int *num_rec, unsigned int num, char *ptr, int *k);
+
+int _printf_oct(va_list *list, char *ptr, int *k);
+void _printf_oct_rec(int *n, unsigned int num, char *ptr, int *k);
+
+int _printf_hex(va_list *list, char *ptr, int *k);
+void _printf_hex_rec(int *n, unsigned int num, char *ptr, int *k);
+
+int _printf_HEX(va_list *list, char *ptr, int *k);
+void _printf_HEX_rec(int *n, unsigned int num, char *ptr, int *k);
+
+void Buffer_editor(char *ptr, int *k, char c);
+
+int printf_custom_S(va_list *list, char *p, int *k);
+
+int _printf_pointer(va_list *list, char *ptr, int *k);
+void _printf_hex_ptr(int *n, unsigned long int num, char *ptr, int *k);
+
+void _printf_strings(int *n, char *str, char *ptr, int *k);
+
+#endif /* MAIN_H */

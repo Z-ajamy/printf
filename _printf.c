@@ -26,6 +26,7 @@ int _printf(const char *str, ...)
 	int i = 0, n = 0, k = 0; /* i for iteration, n for char count, k for buffer index */
 	char *ptr; /* Pointer to dynamically allocated memory for buffer */
 	va_list list; /* Variable argument list */
+
 	if (!str)/* Handle NULL format string */
 		return (-1);
 	ptr = (char *)malloc(sizeof(char) * 1024);/* Allocate memory for the buffer (size 1024) */
