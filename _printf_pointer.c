@@ -1,9 +1,11 @@
 #include "main.h"
 
 /**
- * _printf_hex_ptr - Recursively converts an unsigned long integer to lowercase hexadecimal
+ * _printf_hex_ptr - Recursively converts an unsigned long
+ * integer to lowercase hexadecimal
  *                   and stores the result in a buffer.
- * @n: Pointer to an integer that keeps track of the number of characters printed.
+ * @n: Pointer to an integer that keeps track of the
+ * number of characters printed.
  * @num: The unsigned long integer to be converted and stored as hexadecimal.
  * @ptr: Pointer to the buffer where the formatted output is stored.
  * @k: Pointer to the index of the buffer.
@@ -55,6 +57,7 @@ int _printf_pointer(va_list *list, char *ptr, int *k)
 	if (num == 0)
 	{
 		char *str = "(nil)";
+
 		_printf_strings(&n, str, ptr, k);
 		return (n);
 	}
@@ -69,7 +72,8 @@ int _printf_pointer(va_list *list, char *ptr, int *k)
 
 /**
  * _printf_strings - Prints a string to the buffer.
- * @n: Pointer to an integer that keeps track of the number of characters printed.
+ * @n: Pointer to an integer that keeps track of the number
+ * of characters printed.
  * @str: Pointer to the string to be printed.
  * @ptr: Pointer to the buffer where the formatted output is stored.
  * @k: Pointer to the index of the buffer.

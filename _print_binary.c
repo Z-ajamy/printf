@@ -30,7 +30,8 @@ void binary_rec(int *num_rec, unsigned int num, char *ptr, int *k)
  *
  * Description:
  * Extracts an unsigned integer from the argument list and prints its binary
- * representation using recursion. If the number is zero, it directly stores '0'.
+ * representation using recursion. If the number
+ * is zero, it directly stores '0'.
  *
  * Return: The total number of characters printed.
  */

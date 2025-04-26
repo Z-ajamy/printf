@@ -1,9 +1,11 @@
 #include "main.h"
 
 /**
- * _printf_HEX_rec - Recursively prints the uppercase hexadecimal representation of a number
+ * _printf_HEX_rec - Recursively prints the uppercase
+ * hexadecimal representation of a number
  * @n: Pointer to an integer that keeps track of the number of printed digits
- * @num: The unsigned integer to be converted and printed in uppercase hexadecimal
+ * @num: The unsigned integer to be converted and
+ * printed in uppercase hexadecimal
  * @ptr: Pointer to the buffer where the output is stored
  * @k: Pointer to the index of the buffer
  *
@@ -35,7 +37,8 @@ void _printf_HEX_rec(int *n, unsigned int num, char *ptr, int *k)
 }
 
 /**
- * _printf_HEX - Converts an unsigned integer to uppercase hexadecimal and prints it
+ * _printf_HEX - Converts an unsigned integer to uppercase
+ * hexadecimal and prints it
  * @list: Argument list containing the number to convert
  * @ptr: Pointer to the buffer where the output is stored
  * @k: Pointer to the index of the buffer

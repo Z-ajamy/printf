@@ -24,8 +24,8 @@
  */
 typedef struct
 {
-    char c;
-    int (*ptr)(va_list *list, char *ptr, int *k);
+	char c;
+	int (*ptr)(va_list *list, char *ptr, int *k);
 } char_case;
 
 /* Function prototypes for the custom printf implementation */

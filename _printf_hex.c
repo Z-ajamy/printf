@@ -42,7 +42,8 @@ void _printf_hex_rec(int *n, unsigned int num, char *ptr, int *k)
  * @k: Pointer to the index of the buffer.
  *
  * Description: Extracts an unsigned integer from the argument list and
- *              prints its lowercase hexadecimal representation using recursion.
+ * prints its lowercase hexadecimal representation
+ * using recursion.
  *
  * Return: The total number of characters printed.
  */

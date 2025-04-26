@@ -20,42 +20,32 @@
  *
  * Return: The number of characters printed, or -1 on failure.
  */
+
 int _printf(const char *str, ...)
 {
 	int i = 0, n = 0, k = 0; /* i for iteration, n for char count, k for buffer index */
 	char *ptr; /* Pointer to dynamically allocated memory for buffer */
 	va_list list; /* Variable argument list */
-
-	/* Handle NULL format string */
-	if (!str)
+	if (!str)/* Handle NULL format string */
 		return (-1);
-
-	/* Allocate memory for the buffer (size 1024) */
-	ptr = (char *)malloc(sizeof(char) * 1024);
+	ptr = (char *)malloc(sizeof(char) * 1024);/* Allocate memory for the buffer (size 1024) */
 	if (!ptr)
 		return (-1);
-
-	/* Initialize the variable argument list */
-	va_start(list, str);
-
-	/* Loop through each character in the format string */
-	while (str[i])
+	va_start(list, str);/* Initialize the variable argument list */
+	while (str[i])/* Loop through each character in the format string */
 	{
-		/* If current character is not '%', print it normally */
-		if (str[i] != '%')
+		if (str[i] != '%')/* If current character is not '%', print it normally */
 		{
 			Buffer_editor(ptr, &k, str[i]); /* Store character in buffer */
 			n++; /* Increment character count */
 		}
 		else /* Handle format specifiers */
 		{
-			/* Check if '%' is at the end without a valid specifier */
-			if (!str[i + 1])
+			if (!str[i + 1])/* Check if '%' is at the end without a valid specifier */
 			{
 				n = -1; /* Invalid format string */
 				break;
 			}
-
 			/* Check for supported format specifiers */
 			if (str[i + 1] == 'c' || str[i + 1] == 's' || str[i + 1] == '%'
 				|| str[i + 1] == 'i' || str[i + 1] == 'd' || str[i + 1] == 'b'
@@ -72,14 +62,9 @@ int _printf(const char *str, ...)
 		}
 		i++; /* Move to the next character */
 	}
+	_putchar(ptr, &k);/* Print the buffer contents */
 
-	/* Print the buffer contents */
-	_putchar(ptr, &k);
-
-	/* Free allocated memory and end variable argument list */
-	free(ptr);
+	free(ptr);/* Free allocated memory and end variable argument list */
 	va_end(list);
-
-	/* Return the total number of characters printed */
-	return (n);
+	return (n);/* Return the total number of characters printed */
 }
